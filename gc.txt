@@ -1,0 +1,28 @@
+# Install dependencies (adjust as needed)
+!pip install streamlit pyngrok pdf2image torch transformers qdrant-client tqdm
+
+# Install poppler-utils for PDF processing (required on Linux/Colab)
+!apt-get install -y poppler-utils
+
+# If needed, install colpali_engine and Janus packages.
+# (Uncomment and adjust if these packages are available via pip or install from source)
+!pip install colpali_engine Janus
+!pip install colpali_engine
+!pip install git+https://github.com/deepseek-ai/Janus.git
+!pip install 'qdrant-client[fastembed-gpu]'
+
+!ngrok config add-authtoken 2sIEWRyqMKAvwFkjozBDfwSgnOS_7Frbyf9Z3Jgmu1y4mJ5aK
+
+# Import pyngrok and set up an ngrok tunnel to port 8501 (default Streamlit port)
+from pyngrok import ngrok
+
+# Kill any existing tunnels (optional)
+ngrok.kill()
+
+# Open a tunnel on port 8501
+public_url = ngrok.connect(8501)
+print("Streamlit public URL:", public_url)
+
+# Run Streamlit in headless mode on port 8501.
+# The '&' at the end sends the process to the background.
+!streamlit run app.py --server.port 8501 --server.fileWatcherType none --server.headless true
