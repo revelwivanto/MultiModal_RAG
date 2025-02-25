@@ -116,7 +116,7 @@ with col1:
         """
         # Multimodal RAG powered by <img src="data:image/png;base64,{}" width="170" style="vertical-align: -3px;"> Janus
         """.format(
-            base64.b64encode(open("assets/deep-seek.png", "rb").read()).decode()
+            base64.b64encode(open("assets/bnu.png", "rb").read()).decode()
         ),
         unsafe_allow_html=True,
     )
